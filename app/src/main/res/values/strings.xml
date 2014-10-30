@@ -2,7 +2,26 @@
 <resources>
 
     <string name="app_name">Metodos</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-
+    <string-array name="sis_lineales">
+        <item>Directos</item>
+        <item>Iterativos</item>
+        <item>Factorización</item>
+    </string-array>
+    <string-array name="sisLinealesDirector">
+        <item>Eliminación Gaussiana</item>
+        <item>Pivoteo Parcial</item>
+        <item>Pivoteo Total</item>
+        <item>Pivoteo Escalonado</item>
+    </string-array>
+    <string-array name="sisLinealesIterativos">
+        <item>Jacobi con Relajación</item>
+        <item>Saidel con Relajación</item>
+    </string-array>
+    <string-array name="sisLinealesFactorizacion">
+        <item>LU->Gaussiana</item>
+        <item>LU->Cholesky</item>
+        <item>LU->Crout</item>
+        <item>LU->Doolittle</item>
+    </string-array>
 </resources>
