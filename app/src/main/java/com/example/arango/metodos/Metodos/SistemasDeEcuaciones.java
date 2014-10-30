@@ -1,5 +1,4 @@
-
-package Metodos;
+package com.example.arango.metodos.Metodos;
 
 
 public class SistemasDeEcuaciones {

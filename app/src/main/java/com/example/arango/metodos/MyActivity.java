@@ -2,21 +2,19 @@ package com.example.arango.metodos;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.util.Timer;
-
+import com.example.arango.metodos.Metodos.SistemasDeEcuaciones;
 
 public class MyActivity extends Activity {
     private Spinner spinnerMetodo;
     private Spinner spinnerTipo;
+    private SistemasDeEcuaciones sistemasDeEcuaciones;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,19 +76,29 @@ public class MyActivity extends Activity {
         spinnerMetodo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                /*sistemasDeEcuaciones  = new SistemasDeEcuaciones();
+                int n= tabla.getRowCount();
+                double[][] A = new double[n][n];
+                double[] b = new double[n];*/
                 if(spinnerTipo.getSelectedItem().toString().equals("Directos")){
                     switch(i){
                         case 0:
-                            Toast.makeText(getApplicationContext(), "Direct 0 ",Toast.LENGTH_SHORT).show();
+                            //sistemasDeEcuaciones.eliminacionGauss(A, b, -1);
+                            Toast.makeText(getApplicationContext(), "Elm Gaussiana",Toast.LENGTH_SHORT).show();
                             break;
                         case 1:
-                            Toast.makeText(getApplicationContext(), "Direct 1 ",Toast.LENGTH_SHORT).show();
+                            //sistemasDeEcuaciones.eliminacionGauss(A, b, 0);
+                            Toast.makeText(getApplicationContext(), "Pivoteo Parcial",Toast.LENGTH_SHORT).show();
                             break;
                         case 2:
-                            Toast.makeText(getApplicationContext(), "Direct 2 ",Toast.LENGTH_SHORT).show();
+                            //sistemasDeEcuaciones.eliminacionGauss(A, b, 1);
+                            Toast.makeText(getApplicationContext(), "Pivoteo Total",Toast.LENGTH_SHORT).show();
                             break;
                         case 3:
-                            Toast.makeText(getApplicationContext(), "Direct 3 ",Toast.LENGTH_SHORT).show();
+                            //sistemasDeEcuaciones.eliminacionGauss(A, b, 2);
+                            Toast.makeText(getApplicationContext(), "Pivoteo Escalonado",Toast.LENGTH_SHORT).show();
+                            break;
+                        default:
                             break;
                     }
 
@@ -98,26 +106,45 @@ public class MyActivity extends Activity {
                 if(spinnerTipo.getSelectedItem().toString().equals("Iterativos")){
                     switch(i){
                         case 0:
-                            Toast.makeText(getApplicationContext(), "Iter 0 ",Toast.LENGTH_SHORT).show();
+
+                            /*double lamda = Double.parseDouble(principalFrm.getLamda());
+                            int iter = Integer.parseInt(principalFrm.getIteracion());
+                            double tol = Double.parseDouble(principalFrm.getToler());
+
+                            sistemasDeEcuaciones.Jacobi(A,b,tol,iter,val,lamda);*/
+                            Toast.makeText(getApplicationContext(), "Jacobi",Toast.LENGTH_SHORT).show();
                             break;
                         case 1:
-                            Toast.makeText(getApplicationContext(), "Iter 1 ",Toast.LENGTH_SHORT).show();
+                            /*double lamda = Double.parseDouble(principalFrm.getLamda());
+                            int iter = Integer.parseInt(principalFrm.getIteracion());
+                            double tol = Double.parseDouble(principalFrm.getToler());
+
+                            sistemasDeEcuaciones.Seidel(A,b,tol,iter,val,lamda);*/
+                            Toast.makeText(getApplicationContext(), "Seidel",Toast.LENGTH_SHORT).show();
+                            break;
+                        default:
                             break;
                     }
                 }
                 if(spinnerTipo.getSelectedItem().toString().equals("Factorización")){
                     switch(i){
                         case 0:
-                            Toast.makeText(getApplicationContext(), "Fact 0 ",Toast.LENGTH_SHORT).show();
+                            //sistemasDeEcuaciones.LUeliminacionGauss(A, b);
+                            Toast.makeText(getApplicationContext(), "LU Gauss",Toast.LENGTH_SHORT).show();
                             break;
                         case 1:
-                            Toast.makeText(getApplicationContext(), "Fact 1 ",Toast.LENGTH_SHORT).show();
+                            //sistemasDeEcuaciones.cholesky(A, b);
+                            Toast.makeText(getApplicationContext(), "LU Cholesky",Toast.LENGTH_SHORT).show();
                             break;
                         case 2:
-                            Toast.makeText(getApplicationContext(), "Fact 2 ",Toast.LENGTH_SHORT).show();
+                            //sistemasDeEcuaciones.crout(A, b);
+                            Toast.makeText(getApplicationContext(), "LU Crout",Toast.LENGTH_SHORT).show();
                             break;
                         case 3:
-                            Toast.makeText(getApplicationContext(), "Fact 3 ",Toast.LENGTH_SHORT).show();
+                            //sistemasDeEcuaciones.doolittle(A, b);
+                            Toast.makeText(getApplicationContext(), "LU Doolittle",Toast.LENGTH_SHORT).show();
+                            break;
+                        default:
                             break;
                     }
                 }
