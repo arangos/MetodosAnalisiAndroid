@@ -3,7 +3,10 @@ package com.example.arango.metodos;
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,10 +27,12 @@ public class MyActivity extends Activity {
     private TableLayout tableLayout;
     private Button button;
     private EditText txtNrofilas;
+    private static int metodo_a_usar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
+        metodo_a_usar = 0;
         tableLayout = (TableLayout) findViewById(R.id.tblLayout);
         button = (Button) findViewById(R.id.btnNroFilas);
         txtNrofilas = (EditText) findViewById(R.id.editTextNroFilas);
@@ -95,18 +100,21 @@ public class MyActivity extends Activity {
                 if(spinnerTipo.getSelectedItem().toString().equals("Directos")){
                     switch(i){
                         case 0:
-                            //sistemasDeEcuaciones.eliminacionGauss(A, b, -1);
+                            metodo_a_usar = 0;
                             Toast.makeText(getApplicationContext(), "Elm Gaussiana",Toast.LENGTH_SHORT).show();
                             break;
                         case 1:
+                            metodo_a_usar = 1;
                             //sistemasDeEcuaciones.eliminacionGauss(A, b, 0);
                             Toast.makeText(getApplicationContext(), "Pivoteo Parcial",Toast.LENGTH_SHORT).show();
                             break;
                         case 2:
+                            metodo_a_usar = 2;
                             //sistemasDeEcuaciones.eliminacionGauss(A, b, 1);
                             Toast.makeText(getApplicationContext(), "Pivoteo Total",Toast.LENGTH_SHORT).show();
                             break;
                         case 3:
+                            metodo_a_usar = 3;
                             //sistemasDeEcuaciones.eliminacionGauss(A, b, 2);
                             Toast.makeText(getApplicationContext(), "Pivoteo Escalonado",Toast.LENGTH_SHORT).show();
                             break;
@@ -118,7 +126,7 @@ public class MyActivity extends Activity {
                 if(spinnerTipo.getSelectedItem().toString().equals("Iterativos")){
                     switch(i){
                         case 0:
-
+                            metodo_a_usar = 4;
                             /*double lamda = Double.parseDouble(principalFrm.getLamda());
                             int iter = Integer.parseInt(principalFrm.getIteracion());
                             double tol = Double.parseDouble(principalFrm.getToler());
@@ -127,6 +135,7 @@ public class MyActivity extends Activity {
                             Toast.makeText(getApplicationContext(), "Jacobi",Toast.LENGTH_SHORT).show();
                             break;
                         case 1:
+                            metodo_a_usar = 5;
                             /*double lamda = Double.parseDouble(principalFrm.getLamda());
                             int iter = Integer.parseInt(principalFrm.getIteracion());
                             double tol = Double.parseDouble(principalFrm.getToler());
@@ -141,18 +150,22 @@ public class MyActivity extends Activity {
                 if(spinnerTipo.getSelectedItem().toString().equals("Factorización")){
                     switch(i){
                         case 0:
+                            metodo_a_usar = 6;
                             //sistemasDeEcuaciones.LUeliminacionGauss(A, b);
                             Toast.makeText(getApplicationContext(), "LU Gauss",Toast.LENGTH_SHORT).show();
                             break;
                         case 1:
+                            metodo_a_usar = 7;
                             //sistemasDeEcuaciones.cholesky(A, b);
                             Toast.makeText(getApplicationContext(), "LU Cholesky",Toast.LENGTH_SHORT).show();
                             break;
                         case 2:
+                            metodo_a_usar = 8;
                             //sistemasDeEcuaciones.crout(A, b);
                             Toast.makeText(getApplicationContext(), "LU Crout",Toast.LENGTH_SHORT).show();
                             break;
                         case 3:
+                            metodo_a_usar = 9;
                             //sistemasDeEcuaciones.doolittle(A, b);
                             Toast.makeText(getApplicationContext(), "LU Doolittle",Toast.LENGTH_SHORT).show();
                             break;
@@ -182,11 +195,49 @@ public class MyActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.my, menu);
-        return true;
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.my, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.action_calc:
+                switch (metodo_a_usar){
+                    case 0:
+                        getMatriz();
+                        //sistemasDeEcuaciones.eliminacionGauss(A, b, -1);
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        break;
+                    case 6:
+                        break;
+                    case 7:
+                        break;
+                    case 8:
+                        break;
+                    case 9:
+                        break;
+                }
+                return true;
+            case R.id.action_settings:
+
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
     public void setFilas(int filas){
 
         tableLayout.removeAllViews();
@@ -207,4 +258,24 @@ public class MyActivity extends Activity {
         }
     }
 
+    public void getMatriz(){
+        int filas = tableLayout.getChildCount();
+        Double [][] matriz = new Double[filas][filas];
+        for(int i = 0, c = filas; i < c; i++){
+            // then, you can remove the the row you want...
+            // for instance...
+            TableRow row = (TableRow) tableLayout.getChildAt(i);
+            for(int j = 0; j < row.getChildCount(); j++){
+                EditText editText = (EditText) row.getChildAt(j);
+                matriz[i][j] = Double.parseDouble(editText.getText().toString().trim());
+                //Log.e("[",editText.getText().toString()+"]");
+            }
+        }
+
+        for(int f = 0; f<matriz.length; f++){
+            for(int c = 0; c<matriz[f].length;c++){
+                Log.e("Test Matriz [",matriz[f][c]+"]");
+            }
+        }
+    }
 }
