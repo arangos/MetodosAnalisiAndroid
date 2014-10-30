@@ -1,10 +1,12 @@
 package com.example.arango.metodos.Metodos;
 
 
+import android.util.Log;
+
 public class SistemasDeEcuaciones {
-    private String mensaje;
-    private String res;
-    private double[][] tabla;
+    public String mensaje;
+    public String res;
+    public double[][] tabla;
     //private double[] x;
     
     public String getRes(){
@@ -14,9 +16,10 @@ public class SistemasDeEcuaciones {
     public void imprimir(double[][] A){
         for(int i=0;i<A.length;i++){
             for(int j=0;j<A[0].length;j++){
-                System.out.print(A[i][j]+"\t");
+                Log.d("", A[i][j] + "\t");
+                //System.out.print(A[i][j]+"\t");
             }
-            System.out.println();
+            //System.out.println();
         }
     }
     

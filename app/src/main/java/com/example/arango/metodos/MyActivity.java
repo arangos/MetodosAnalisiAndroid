@@ -32,6 +32,7 @@ public class MyActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
+        sistemasDeEcuaciones = new SistemasDeEcuaciones();
         metodo_a_usar = 0;
         tableLayout = (TableLayout) findViewById(R.id.tblLayout);
         button = (Button) findViewById(R.id.btnNroFilas);
@@ -93,10 +94,6 @@ public class MyActivity extends Activity {
         spinnerMetodo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                /*sistemasDeEcuaciones  = new SistemasDeEcuaciones();
-                int n= tabla.getRowCount();
-                double[][] A = new double[n][n];
-                double[] b = new double[n];*/
                 if(spinnerTipo.getSelectedItem().toString().equals("Directos")){
                     switch(i){
                         case 0:
@@ -105,17 +102,14 @@ public class MyActivity extends Activity {
                             break;
                         case 1:
                             metodo_a_usar = 1;
-                            //sistemasDeEcuaciones.eliminacionGauss(A, b, 0);
                             Toast.makeText(getApplicationContext(), "Pivoteo Parcial",Toast.LENGTH_SHORT).show();
                             break;
                         case 2:
                             metodo_a_usar = 2;
-                            //sistemasDeEcuaciones.eliminacionGauss(A, b, 1);
                             Toast.makeText(getApplicationContext(), "Pivoteo Total",Toast.LENGTH_SHORT).show();
                             break;
                         case 3:
                             metodo_a_usar = 3;
-                            //sistemasDeEcuaciones.eliminacionGauss(A, b, 2);
                             Toast.makeText(getApplicationContext(), "Pivoteo Escalonado",Toast.LENGTH_SHORT).show();
                             break;
                         default:
@@ -206,16 +200,25 @@ public class MyActivity extends Activity {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
             case R.id.action_calc:
+                double [][] A = getMatriz();
+                double[] b = new double[A.length];
+                int n = A.length;
+                for(int i=0;i<n;i++){
+                    b[i] = A[i][n];
+                    Log.d("B[ ", Double.toString(b[i]));
+                }
                 switch (metodo_a_usar){
                     case 0:
-                        getMatriz();
-                        //sistemasDeEcuaciones.eliminacionGauss(A, b, -1);
+                        sistemasDeEcuaciones.eliminacionGauss(A, b, -1);
                         break;
                     case 1:
+                        sistemasDeEcuaciones.eliminacionGauss(A, b, 0);
                         break;
                     case 2:
+                        sistemasDeEcuaciones.eliminacionGauss(A, b, 1);
                         break;
                     case 3:
+                        sistemasDeEcuaciones.eliminacionGauss(A, b, 2);
                         break;
                     case 4:
                         break;
@@ -230,6 +233,9 @@ public class MyActivity extends Activity {
                     case 9:
                         break;
                 }
+                //String resultado = sistemasDeEcuaciones.getRes();
+                //Toast.makeText(getBaseContext(), resultado.length(), Toast.LENGTH_LONG).show();
+                //Log.e("Result", resultado);
                 return true;
             case R.id.action_settings:
 
@@ -245,11 +251,11 @@ public class MyActivity extends Activity {
             TableRow row = new TableRow(MyActivity.this);
             row.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
 
-            for (int j = 0; j < filas; j++) {
+            for (int j = 0; j < filas+1; j++) {
                 EditText edit = new EditText(MyActivity.this);
                 edit.setInputType(InputType.TYPE_CLASS_NUMBER|InputType.TYPE_NUMBER_FLAG_DECIMAL|InputType.TYPE_NUMBER_FLAG_SIGNED);
                 edit.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-                edit.setText("0");
+                edit.setText("");
 
                 //edit.setKeyListener();
                 row.addView(edit);
@@ -258,9 +264,9 @@ public class MyActivity extends Activity {
         }
     }
 
-    public void getMatriz(){
+    public double[][] getMatriz(){
         int filas = tableLayout.getChildCount();
-        Double [][] matriz = new Double[filas][filas];
+        double [][] matriz = new double[filas][filas+1];
         for(int i = 0, c = filas; i < c; i++){
             // then, you can remove the the row you want...
             // for instance...
@@ -277,5 +283,6 @@ public class MyActivity extends Activity {
                 Log.e("Test Matriz [",matriz[f][c]+"]");
             }
         }
+        return matriz;
     }
 }
