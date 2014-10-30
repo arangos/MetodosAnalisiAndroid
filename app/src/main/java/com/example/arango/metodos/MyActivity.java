@@ -2,11 +2,17 @@ package com.example.arango.metodos;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.arango.metodos.Metodos.SistemasDeEcuaciones;
@@ -15,10 +21,16 @@ public class MyActivity extends Activity {
     private Spinner spinnerMetodo;
     private Spinner spinnerTipo;
     private SistemasDeEcuaciones sistemasDeEcuaciones;
+    private TableLayout tableLayout;
+    private Button button;
+    private EditText txtNrofilas;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
+        tableLayout = (TableLayout) findViewById(R.id.tblLayout);
+        button = (Button) findViewById(R.id.btnNroFilas);
+        txtNrofilas = (EditText) findViewById(R.id.editTextNroFilas);
         spinnerTipo = (Spinner) findViewById(R.id.spinnerTipo);
 // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -155,6 +167,15 @@ public class MyActivity extends Activity {
 
             }
         });
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Toast.makeText(getApplicationContext(),txtNrofilas.getText().toString(),Toast.LENGTH_SHORT).show();
+                int filas = Integer.parseInt(txtNrofilas.getText().toString());
+                setFilas(filas);
+            }
+        });
     }
 
 
@@ -164,6 +185,26 @@ public class MyActivity extends Activity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.my, menu);
         return true;
+    }
+
+    public void setFilas(int filas){
+
+        tableLayout.removeAllViews();
+        for (int i = 0; i < filas; i++) {
+            TableRow row = new TableRow(MyActivity.this);
+            row.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+
+            for (int j = 0; j < filas; j++) {
+                EditText edit = new EditText(MyActivity.this);
+                edit.setInputType(InputType.TYPE_CLASS_NUMBER|InputType.TYPE_NUMBER_FLAG_DECIMAL|InputType.TYPE_NUMBER_FLAG_SIGNED);
+                edit.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+                edit.setText("0");
+
+                //edit.setKeyListener();
+                row.addView(edit);
+            }
+            tableLayout.addView(row);
+        }
     }
 
 }

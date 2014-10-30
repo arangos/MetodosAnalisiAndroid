@@ -6,7 +6,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context=".MyActivity">
+    tools:context=".MyActivity"
+    android:background="#ffd6d6d6">
 
     <Spinner
         android:layout_width="wrap_content"
@@ -14,7 +15,9 @@
         android:id="@+id/spinnerTipo"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/btnNroFilas"
+        android:layout_toStartOf="@+id/btnNroFilas" />
 
     <Spinner
         android:layout_width="wrap_content"
@@ -23,15 +26,52 @@
         android:layout_below="@+id/spinnerTipo"
         android:layout_alignParentLeft="true"
         android:textColor="#d00003ff"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/btnNroFilas"
+        android:layout_toStartOf="@+id/btnNroFilas" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ingresar Filas"
+        android:id="@+id/btnNroFilas"
+        android:background="#ffff4d4b"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/spinnerTipo"
+        android:clickable="false"
+        android:layout_above="@+id/scrollView" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
-        android:id="@+id/editText"
+        android:id="@+id/editTextNroFilas"
+        android:layout_toEndOf="@+id/spinnerTipo"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:hint="# filas"
+        android:layout_toRightOf="@+id/spinnerTipo" />
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scrollbars="none"
+        android:layout_weight="1"
         android:layout_below="@+id/spinnerMetodo"
+        android:id="@+id/scrollView">
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/tblLayout"
+        android:background="#1c1600ff"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/spinnerMetodo"
+        android:layout_alignParentBottom="true"></TableLayout>
+    </ScrollView>
 </RelativeLayout>
