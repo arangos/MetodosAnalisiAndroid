@@ -3,6 +3,7 @@ package com.example.arango.metodos;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,6 +23,7 @@ public class ResultActivity extends Activity {
         Intent intent = getIntent();
         String message = intent.getStringExtra(ResultActivity.EXTRA_MESSAGE);
         TextView textView = (TextView) findViewById(R.id.txtResultados);
+        textView.setMovementMethod(new ScrollingMovementMethod());
         if(message != null) {
             // Create the text view
             //textView.setTextSize(40);
