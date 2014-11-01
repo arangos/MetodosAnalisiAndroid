@@ -218,10 +218,12 @@ public class SistemasDeEcuaciones {
     
     public double[] eliminacionGauss(double[][] A, double[] b, int typePiv){
         int n = A.length;
+        Log.e("Matriz Lenght  NN::> > ", Integer.toString(n));
         int l = A[0].length;
         tabla = new double[A.length][A[0].length+1];
         if(n!=l){
             mensaje = "A no es una matriz cuadrada.";
+            res = "A no es una matriz cuadrada.";
             return new double[0];
         }else{
             aumentada(A, b);
@@ -259,7 +261,7 @@ public class SistemasDeEcuaciones {
                 }
                 res+="\n";
                 agregarRes(tabla);
-                res+="\n";                
+                res+="\n";
             }
             
             double suma;

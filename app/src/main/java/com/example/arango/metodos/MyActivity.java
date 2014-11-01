@@ -1,6 +1,7 @@
 package com.example.arango.metodos;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -15,19 +16,24 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.arango.metodos.Metodos.SistemasDeEcuaciones;
 
 public class MyActivity extends Activity {
     private Spinner spinnerMetodo;
+    public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
     private Spinner spinnerTipo;
     private SistemasDeEcuaciones sistemasDeEcuaciones;
     private TableLayout tableLayout;
     private Button button;
     private EditText txtNrofilas;
+    public String result;
+    //
     private static int metodo_a_usar;
+    private double[] b;
+    private double [][] matriz;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,19 +104,19 @@ public class MyActivity extends Activity {
                     switch(i){
                         case 0:
                             metodo_a_usar = 0;
-                            Toast.makeText(getApplicationContext(), "Elm Gaussiana",Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(), "Elm Gaussiana",Toast.LENGTH_SHORT).show();
                             break;
                         case 1:
                             metodo_a_usar = 1;
-                            Toast.makeText(getApplicationContext(), "Pivoteo Parcial",Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(), "Pivoteo Parcial",Toast.LENGTH_SHORT).show();
                             break;
                         case 2:
                             metodo_a_usar = 2;
-                            Toast.makeText(getApplicationContext(), "Pivoteo Total",Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(), "Pivoteo Total",Toast.LENGTH_SHORT).show();
                             break;
                         case 3:
                             metodo_a_usar = 3;
-                            Toast.makeText(getApplicationContext(), "Pivoteo Escalonado",Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(), "Pivoteo Escalonado",Toast.LENGTH_SHORT).show();
                             break;
                         default:
                             break;
@@ -126,7 +132,7 @@ public class MyActivity extends Activity {
                             double tol = Double.parseDouble(principalFrm.getToler());
 
                             sistemasDeEcuaciones.Jacobi(A,b,tol,iter,val,lamda);*/
-                            Toast.makeText(getApplicationContext(), "Jacobi",Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(), "Jacobi",Toast.LENGTH_SHORT).show();
                             break;
                         case 1:
                             metodo_a_usar = 5;
@@ -135,7 +141,7 @@ public class MyActivity extends Activity {
                             double tol = Double.parseDouble(principalFrm.getToler());
 
                             sistemasDeEcuaciones.Seidel(A,b,tol,iter,val,lamda);*/
-                            Toast.makeText(getApplicationContext(), "Seidel",Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(), "Seidel",Toast.LENGTH_SHORT).show();
                             break;
                         default:
                             break;
@@ -146,22 +152,22 @@ public class MyActivity extends Activity {
                         case 0:
                             metodo_a_usar = 6;
                             //sistemasDeEcuaciones.LUeliminacionGauss(A, b);
-                            Toast.makeText(getApplicationContext(), "LU Gauss",Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(), "LU Gauss",Toast.LENGTH_SHORT).show();
                             break;
                         case 1:
                             metodo_a_usar = 7;
                             //sistemasDeEcuaciones.cholesky(A, b);
-                            Toast.makeText(getApplicationContext(), "LU Cholesky",Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(), "LU Cholesky",Toast.LENGTH_SHORT).show();
                             break;
                         case 2:
                             metodo_a_usar = 8;
                             //sistemasDeEcuaciones.crout(A, b);
-                            Toast.makeText(getApplicationContext(), "LU Crout",Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(), "LU Crout",Toast.LENGTH_SHORT).show();
                             break;
                         case 3:
                             metodo_a_usar = 9;
                             //sistemasDeEcuaciones.doolittle(A, b);
-                            Toast.makeText(getApplicationContext(), "LU Doolittle",Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(), "LU Doolittle",Toast.LENGTH_SHORT).show();
                             break;
                         default:
                             break;
@@ -200,13 +206,9 @@ public class MyActivity extends Activity {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
             case R.id.action_calc:
+                this.setMatriz();
                 double [][] A = getMatriz();
-                double[] b = new double[A.length];
-                int n = A.length;
-                for(int i=0;i<n;i++){
-                    b[i] = A[i][n];
-                    Log.d("B[ ", Double.toString(b[i]));
-                }
+                this.setB();
                 switch (metodo_a_usar){
                     case 0:
                         sistemasDeEcuaciones.eliminacionGauss(A, b, -1);
@@ -233,17 +235,29 @@ public class MyActivity extends Activity {
                     case 9:
                         break;
                 }
-                //String resultado = sistemasDeEcuaciones.getRes();
-                //Toast.makeText(getBaseContext(), resultado.length(), Toast.LENGTH_LONG).show();
-                //Log.e("Result", resultado);
+                result = "";
+                result += sistemasDeEcuaciones.getRes();
+                //resultado = Integer.toString(resultado.length());
+                sistemasDeEcuaciones.imprimir(A);
+                Toast.makeText(getBaseContext(), result, Toast.LENGTH_LONG).show();
+                Log.e("Result", result);
                 return true;
             case R.id.action_settings:
 
+                return true;
+            case R.id.action_results:
+                new ResultActivity();
+                Intent intent = new Intent(this, ResultActivity.class);
+                intent.putExtra(EXTRA_MESSAGE, result);
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
+    /*
+    *Create the table View when user input the size of the matrix
+     */
     public void setFilas(int filas){
 
         tableLayout.removeAllViews();
@@ -264,14 +278,15 @@ public class MyActivity extends Activity {
         }
     }
 
-    public double[][] getMatriz(){
+    /*
+    *Return the matrix values inside each row
+     */
+    public void setMatriz(){
         int filas = tableLayout.getChildCount();
-        double [][] matriz = new double[filas][filas+1];
+        matriz = new double[filas][filas];
         for(int i = 0, c = filas; i < c; i++){
-            // then, you can remove the the row you want...
-            // for instance...
             TableRow row = (TableRow) tableLayout.getChildAt(i);
-            for(int j = 0; j < row.getChildCount(); j++){
+            for(int j = 0; j < row.getChildCount()-1; j++){
                 EditText editText = (EditText) row.getChildAt(j);
                 matriz[i][j] = Double.parseDouble(editText.getText().toString().trim());
                 //Log.e("[",editText.getText().toString()+"]");
@@ -283,6 +298,19 @@ public class MyActivity extends Activity {
                 Log.e("Test Matriz [",matriz[f][c]+"]");
             }
         }
-        return matriz;
+    }
+    public double [][] getMatriz(){
+        return this.matriz;
+    }
+    //Required the matriz previusly setted
+    public void setB(){
+        b = new double[this.getMatriz().length];
+        int filas = tableLayout.getChildCount();
+        for(int i = 0, c = filas; i < c; i++){
+            TableRow row = (TableRow) tableLayout.getChildAt(i);
+            EditText editText = (EditText) row.getChildAt(row.getChildCount()-1);
+            b[i] = Double.parseDouble(editText.getText().toString().trim());
+            //Log.e("[",editText.getText().toString()+"]");
+        }
     }
 }

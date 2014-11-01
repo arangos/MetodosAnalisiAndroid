@@ -1,13 +1,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".MyActivity" >
+    tools:context=".ResultActivity" >
     <!-- Search, should appear as action button -->
-    <item android:id="@+id/action_calc"
-        android:icon="@android:drawable/ic_menu_rotate"
+    <item android:id="@+id/action_back"
+        android:icon="@android:drawable/ic_menu_revert"
         android:title="Calcular"
-        android:showAsAction="ifRoom" />
-    <item android:id="@+id/action_results"
-        android:title="Resultado"
         android:showAsAction="ifRoom" />
     <!-- Settings, should always be in the overflow -->
     <item android:id="@+id/action_settings"
