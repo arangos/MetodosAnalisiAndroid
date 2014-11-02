@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 import com.example.arango.metodos.Metodos.SistemasDeEcuaciones;
 
-public class MyActivity extends Activity {
+public class Ec_LinealesActivity extends Activity {
     private Spinner spinnerMetodo;
     public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
     private Spinner spinnerTipo;
@@ -223,16 +223,22 @@ public class MyActivity extends Activity {
                         sistemasDeEcuaciones.eliminacionGauss(A, b, 2);
                         break;
                     case 4:
+                        //Jacobi
                         break;
                     case 5:
+                        //Seidel
                         break;
                     case 6:
+                        sistemasDeEcuaciones.LUeliminacionGauss(A, b);
                         break;
                     case 7:
+                        sistemasDeEcuaciones.cholesky(A, b);
                         break;
                     case 8:
+                        sistemasDeEcuaciones.crout(A, b);
                         break;
                     case 9:
+                        sistemasDeEcuaciones.doolittle(A, b);
                         break;
                 }
                 result = "";
@@ -251,6 +257,9 @@ public class MyActivity extends Activity {
                 intent.putExtra(EXTRA_MESSAGE, result);
                 startActivity(intent);
                 return true;
+            case R.id.action_back:
+                finish();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -262,11 +271,11 @@ public class MyActivity extends Activity {
 
         tableLayout.removeAllViews();
         for (int i = 0; i < filas; i++) {
-            TableRow row = new TableRow(MyActivity.this);
+            TableRow row = new TableRow(Ec_LinealesActivity.this);
             row.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
 
             for (int j = 0; j < filas+1; j++) {
-                EditText edit = new EditText(MyActivity.this);
+                EditText edit = new EditText(Ec_LinealesActivity.this);
                 edit.setInputType(InputType.TYPE_CLASS_NUMBER|InputType.TYPE_NUMBER_FLAG_DECIMAL|InputType.TYPE_NUMBER_FLAG_SIGNED);
                 edit.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
                 edit.setText("");

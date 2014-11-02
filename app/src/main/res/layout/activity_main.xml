@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ScrollView01"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <Button
+        android:layout_width="278dp"
+        android:layout_height="wrap_content"
+        android:text="Ecuaciones no lineales"
+        android:id="@+id/btnNoLineales"
+        android:layout_gravity="center_horizontal"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/btnInterpolacion"
+        android:layout_alignEnd="@+id/btnInterpolacion"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/button"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sistemas de ecuaciones lineales"
+        android:id="@+id/btnlineales"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/btnNoLineales"
+        android:background="@drawable/button"
+        android:layout_marginTop="58dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="275dp"
+        android:layout_height="wrap_content"
+        android:text="Interpolación"
+        android:background="@drawable/button"
+        android:id="@+id/btnInterpolacion"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/btnlineales"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="58dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="268dp"
+        android:layout_height="wrap_content"
+        android:text="Integración Numérica"
+        android:id="@+id/btnIntegracionNum"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/btnInterpolacion"
+        android:layout_marginTop="52dp"
+        android:background="@drawable/button"
+        android:layout_alignRight="@+id/btnlineales"
+        android:layout_alignEnd="@+id/btnlineales"
+        android:layout_alignLeft="@+id/btnInterpolacion"
+        android:layout_alignStart="@+id/btnInterpolacion" />
+</RelativeLayout>
+</ScrollView>

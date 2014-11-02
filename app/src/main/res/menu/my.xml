@@ -9,6 +9,10 @@
     <item android:id="@+id/action_results"
         android:title="Resultado"
         android:showAsAction="ifRoom" />
+    <item android:id="@+id/action_back"
+        android:icon="@android:drawable/ic_menu_revert"
+        android:title="Calcular"
+        android:showAsAction="ifRoom" />
     <!-- Settings, should always be in the overflow -->
     <item android:id="@+id/action_settings"
         android:title="@string/action_settings"
