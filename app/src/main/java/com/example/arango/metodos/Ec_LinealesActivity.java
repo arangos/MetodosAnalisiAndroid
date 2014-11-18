@@ -37,7 +37,7 @@ public class Ec_LinealesActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my);
+        setContentView(R.layout.activity_lineales);
         sistemasDeEcuaciones = new SistemasDeEcuaciones();
         metodo_a_usar = 0;
         tableLayout = (TableLayout) findViewById(R.id.tblLayout);

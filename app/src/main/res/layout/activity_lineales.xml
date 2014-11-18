@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:text="Ingresar Filas"
         android:id="@+id/btnNroFilas"
-        android:background="#ffff4d4b"
+        android:background="@drawable/button"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/spinnerTipo"
