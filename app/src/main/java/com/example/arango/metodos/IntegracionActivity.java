@@ -9,6 +9,6 @@ import android.os.Bundle;
 public class IntegracionActivity extends Activity {
     public void OnCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nolineales);
+        setContentView(R.layout.activity_integracion);
     }
 }
