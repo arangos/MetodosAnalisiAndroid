@@ -18,9 +18,9 @@ public class MainActivity extends Activity {
         btnNoLineales.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //new Ec_NoLinealesActivity();
-                //Intent intent = new Intent(this, Ec_NoLinealesActivity);
-                //startActivity(intent);
+                new NoLinealesActivity();
+                Intent intent = new Intent(getBaseContext(), NoLinealesActivity.class);
+                startActivity(intent);
             }
         });
         Button btnLineales = (Button) findViewById(R.id.btnlineales);
@@ -36,14 +36,18 @@ public class MainActivity extends Activity {
         btnInterpolacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                new InterpolacionActivity();
+                Intent intent = new Intent(getBaseContext(), InterpolacionActivity.class);
+                startActivity(intent);
             }
         });
         Button btnIntegraionNum = (Button) findViewById(R.id.btnIntegracionNum);
         btnIntegraionNum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                new IntegracionActivity();
+                Intent intent = new Intent(getBaseContext(), IntegracionActivity.class);
+                startActivity(intent);
             }
         });
 

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="noLineales">
+        <item>Búsqueda incremental</item>
+        <item>Bisección</item>
+        <item>Regla Falsa</item>
+        <item>Punto Fijo</item>
+        <item>Newton</item>
+        <item>Secante</item>
+        <item>Raices Múltiples</item>
+    </array>
+</resources>

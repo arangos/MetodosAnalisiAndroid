@@ -4,6 +4,10 @@
     <string name="app_name">Metodos</string>
     <string name="app_result">Resultado</string>
     <string name="action_settings">Settings</string>
+    <string name="lblNoLineales">Ecuaciones No lineales</string>
+    <string name="lblInterpolacion">Interpolación</string>
+    <string name="lblIntegracion">Integración Numérica</string>
+    <string name="lblLineales">Sistema de Ecuaciones Lineales</string>
     <string-array name="sis_lineales">
         <item>Directos</item>
         <item>Iterativos</item>
