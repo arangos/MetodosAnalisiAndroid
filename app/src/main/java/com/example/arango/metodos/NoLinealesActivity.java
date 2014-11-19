@@ -9,7 +9,7 @@ import android.widget.Spinner;
  * Created by Felipe on 18/11/2014.
  */
 public class NoLinealesActivity extends Activity {
-    public void OnCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nolineales);
 
