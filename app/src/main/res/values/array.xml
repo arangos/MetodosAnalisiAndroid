@@ -9,4 +9,16 @@
         <item>Secante</item>
         <item>Raices Múltiples</item>
     </array>
+    <array name="integracion">
+        <item>Trapecio</item>
+        <item>Trapecio Compuesto</item>
+        <item>Simpson 1/3</item>
+        <item>Simpson 1/3 Compuesto</item>
+        <item>Simpson 3/8</item>
+        <item>Simpson 3/8 Compuesto</item>
+    </array>
+    <array name="interpolacion">
+        <item>Polinomio de Newton</item>
+        <item>Polinomio de Lagrange</item>
+    </array>
 </resources>

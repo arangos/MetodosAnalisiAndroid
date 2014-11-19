@@ -5,11 +5,10 @@
     android:layout_height="match_parent"
     android:weightSum="1">
 
-    <TextView
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/txtFuncion"
+        android:id="@+id/edtxtNoLnFuncion"
         android:layout_weight="0.06"
         android:hint="Función?" />
 
@@ -41,4 +40,11 @@
         android:ems="10"
         android:id="@+id/editTextIteraciones"
         android:hint="Iteraciones" />
+
+    <Button
+        android:layout_width="124dp"
+        android:layout_height="wrap_content"
+        android:text="Calcular"
+        android:id="@+id/buttonCalcNoLin"
+        android:background="@drawable/button" />
 </LinearLayout>
