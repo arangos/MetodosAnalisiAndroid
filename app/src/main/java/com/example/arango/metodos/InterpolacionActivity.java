@@ -73,39 +73,41 @@ public class InterpolacionActivity extends Activity{
             @Override
             public void onClick(View view) {
                 if(metodo_a_usar != -1){
-                setMatriz();
-                    Intent intent = new Intent(getBaseContext(), ResultActivity.class);
-                    Interpolacion interpolacion = new Interpolacion();
-                    //Valores terminos independientes
-                    double[] xi  = new double[matriz.length];
-                    for(int count= 0; count < matriz.length; count++){
-                        xi[count] = matriz[count][0];
-                        //Log.e("Xi", Double.toString(xi[count]));
-                    }
-                    //Función evaluada en xi
-                    double[] fxi = new double[matriz.length];
-                    for(int count= 0; count < matriz.length; count++){
-                        fxi[count] = matriz[count][1];
-                        //Log.e("Fxi", Double.toString(fxi[count]));
-                    }
-                    double x0 = Double.parseDouble(valorAInterpolar.getText().toString().trim());
-                    String result = "";
-                    switch (metodo_a_usar){
-                        case 0:
-                            interpolacion.Newton(fxi, xi, x0);
-                            result = interpolacion.getRes();
-                            intent.putExtra(EXTRA_MESSAGE, result);
-                            new ResultActivity();
-                            startActivity(intent);
-                            break;
-                        case 1:
-                            interpolacion.Lagrange(fxi, xi, x0);
-                            result = interpolacion.getRes();
-                            intent.putExtra(EXTRA_MESSAGE, result);
-                            new ResultActivity();
-                            startActivity(intent);
-                            break;
-                    }
+                    try {
+                        setMatriz();
+                        Intent intent = new Intent(getBaseContext(), ResultActivity.class);
+                        Interpolacion interpolacion = new Interpolacion();
+                        //Valores terminos independientes
+                        double[] xi = new double[matriz.length];
+                        for (int count = 0; count < matriz.length; count++) {
+                            xi[count] = matriz[count][0];
+                            //Log.e("Xi", Double.toString(xi[count]));
+                        }
+                        //Función evaluada en xi
+                        double[] fxi = new double[matriz.length];
+                        for (int count = 0; count < matriz.length; count++) {
+                            fxi[count] = matriz[count][1];
+                            //Log.e("Fxi", Double.toString(fxi[count]));
+                        }
+                        double x0 = Double.parseDouble(valorAInterpolar.getText().toString().trim());
+                        String result = "";
+                        switch (metodo_a_usar) {
+                            case 0:
+                                interpolacion.Newton(fxi, xi, x0);
+                                result = interpolacion.getRes();
+                                intent.putExtra(EXTRA_MESSAGE, result);
+                                new ResultActivity();
+                                startActivity(intent);
+                                break;
+                            case 1:
+                                interpolacion.Lagrange(fxi, xi, x0);
+                                result = interpolacion.getRes();
+                                intent.putExtra(EXTRA_MESSAGE, result);
+                                new ResultActivity();
+                                startActivity(intent);
+                                break;
+                        }
+                    }catch(Exception e){Log.e("Exception e", e.toString());}
                 }else{
                     Toast.makeText(getBaseContext(),"Seleccione un método a usar", Toast.LENGTH_SHORT).show();
                 }

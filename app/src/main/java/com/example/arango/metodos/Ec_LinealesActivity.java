@@ -185,8 +185,14 @@ public class Ec_LinealesActivity extends Activity {
             @Override
             public void onClick(View view) {
                 //Toast.makeText(getApplicationContext(),txtNrofilas.getText().toString(),Toast.LENGTH_SHORT).show();
-                int filas = Integer.parseInt(txtNrofilas.getText().toString());
-                setFilas(filas);
+                try {
+                    if(txtNrofilas.getText().length() <= 0){
+                        Toast.makeText(getBaseContext(), "Ingrese nro de filas y luego la matriz", Toast.LENGTH_SHORT).show();
+                    }else{
+                    int filas = Integer.parseInt(txtNrofilas.getText().toString());
+                    setFilas(filas);
+                    }
+                }catch(Exception e){Log.e("Error :", e.toString());}
             }
         });
     }
@@ -204,65 +210,68 @@ public class Ec_LinealesActivity extends Activity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle presses on the action bar items
-        switch (item.getItemId()) {
-            case R.id.action_calc:
-                this.setMatriz();
-                double [][] A = getMatriz();
-                this.setB();
-                switch (metodo_a_usar){
-                    case 0:
-                        sistemasDeEcuaciones.eliminacionGauss(A, b, -1);
-                        break;
-                    case 1:
-                        sistemasDeEcuaciones.eliminacionGauss(A, b, 0);
-                        break;
-                    case 2:
-                        sistemasDeEcuaciones.eliminacionGauss(A, b, 1);
-                        break;
-                    case 3:
-                        sistemasDeEcuaciones.eliminacionGauss(A, b, 2);
-                        break;
-                    case 4:
-                        //Jacobi
-                        break;
-                    case 5:
-                        //Seidel
-                        break;
-                    case 6:
-                        sistemasDeEcuaciones.LUeliminacionGauss(A, b);
-                        break;
-                    case 7:
-                        sistemasDeEcuaciones.cholesky(A, b);
-                        break;
-                    case 8:
-                        sistemasDeEcuaciones.crout(A, b);
-                        break;
-                    case 9:
-                        sistemasDeEcuaciones.doolittle(A, b);
-                        break;
-                }
-                result = "";
-                result += sistemasDeEcuaciones.getRes();
-                //resultado = Integer.toString(resultado.length());
-                sistemasDeEcuaciones.imprimir(A);
-                //Toast.makeText(getBaseContext(), result, Toast.LENGTH_LONG).show();
-                //Log.e("Result", result);
-                return true;
-            case R.id.action_settings:
+        try {
+            switch (item.getItemId()) {
+                case R.id.action_calc:
+                    this.setMatriz();
+                    double[][] A = getMatriz();
+                    this.setB();
+                    switch (metodo_a_usar) {
+                        case 0:
+                            sistemasDeEcuaciones.eliminacionGauss(A, b, -1);
+                            break;
+                        case 1:
+                            sistemasDeEcuaciones.eliminacionGauss(A, b, 0);
+                            break;
+                        case 2:
+                            sistemasDeEcuaciones.eliminacionGauss(A, b, 1);
+                            break;
+                        case 3:
+                            sistemasDeEcuaciones.eliminacionGauss(A, b, 2);
+                            break;
+                        case 4:
+                            //Jacobi
+                            break;
+                        case 5:
+                            //Seidel
+                            break;
+                        case 6:
+                            sistemasDeEcuaciones.LUeliminacionGauss(A, b);
+                            break;
+                        case 7:
+                            sistemasDeEcuaciones.cholesky(A, b);
+                            break;
+                        case 8:
+                            sistemasDeEcuaciones.crout(A, b);
+                            break;
+                        case 9:
+                            sistemasDeEcuaciones.doolittle(A, b);
+                            break;
+                    }
+                    result = "";
+                    result += sistemasDeEcuaciones.getRes();
+                    //resultado = Integer.toString(resultado.length());
+                    sistemasDeEcuaciones.imprimir(A);
+                    //Toast.makeText(getBaseContext(), result, Toast.LENGTH_LONG).show();
+                    //Log.e("Result", result);
+                    return true;
+                case R.id.action_settings:
 
-                return true;
-            case R.id.action_results:
-                new ResultActivity();
-                Intent intent = new Intent(this, ResultActivity.class);
-                intent.putExtra(EXTRA_MESSAGE, result);
-                startActivity(intent);
-                return true;
-            case R.id.action_back:
-                finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+                    return true;
+                case R.id.action_results:
+                    new ResultActivity();
+                    Intent intent = new Intent(this, ResultActivity.class);
+                    intent.putExtra(EXTRA_MESSAGE, result);
+                    startActivity(intent);
+                    return true;
+                case R.id.action_back:
+                    finish();
+                    return true;
+                default:
+                    return super.onOptionsItemSelected(item);
+            }
+        }catch (Exception e){Log.e("Exception", e.toString());
+            return super.onOptionsItemSelected(item);}
     }
     /*
     *Create the table View when user input the size of the matrix
