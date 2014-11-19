@@ -2,7 +2,7 @@
     android:id="@+id/ScrollView01"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#fff6f6f6">
+    android:background="#ffb8b8b8">
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -79,6 +79,35 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/spinnerMetodo"
         android:layout_alignParentBottom="true"></TableLayout>
+
     </ScrollView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="VALORES INICIALES (x0, x1, .. , Xn)"
+        android:visibility="gone"
+        android:id="@+id/txtValIniLineales"
+        android:layout_below="@id/scrollView"/>
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tblVIniLineales"
+        android:background="#ff00cf0f"
+        android:visibility="gone"
+        android:layout_below="@+id/txtValIniLineales"></TableLayout>
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Iteraciones"
+        android:id="@+id/edtxtIterLin"
+        android:visibility="gone"
+        android:layout_below="@id/tblVIniLineales"/>
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/edtxtTolLin"
+        android:visibility="gone"
+        android:layout_below="@+id/edtxtIterLin"
+        android:hint="Tolerancia"/>
 </RelativeLayout>
 </ScrollView>
