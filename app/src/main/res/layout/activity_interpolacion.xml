@@ -4,4 +4,31 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/edtxtNumeroPuntos"
+        android:hint="nro de puntos" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinnerInterpolacion" />
+
+    <Button
+        android:layout_width="86dp"
+        android:layout_height="wrap_content"
+        android:text="Calcular"
+        android:background="@drawable/button"
+        android:id="@+id/btnCalcInterpolacion" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/edtxtInterpValor"
+        android:hint="Valor a interpolar" />
 </LinearLayout>
