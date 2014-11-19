@@ -15,12 +15,15 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.Toast;
 
+import com.example.arango.metodos.Metodos.Interpolacion;
+
 /**
  * Created by Felipe on 18/11/2014.
  */
 public class InterpolacionActivity extends Activity{
     private TableLayout tblInterpolacion;
-    private double[] b;
+    private EditText valorAInterpolar;
+    public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
     private double [][] matriz;
     private static int metodo_a_usar;
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,7 @@ public class InterpolacionActivity extends Activity{
             }
         });
 
+        valorAInterpolar = (EditText)findViewById(R.id.edtxtInterpValor);
         tblInterpolacion = (TableLayout)findViewById(R.id.tblInterpolacion);
         final EditText nrofilas = (EditText)findViewById(R.id.txtInterpNumeroPuntos);
         Button btnFilas = (Button)findViewById(R.id.btnInterpFilas);
@@ -71,12 +75,33 @@ public class InterpolacionActivity extends Activity{
                 if(metodo_a_usar != -1){
                 setMatriz();
                     Intent intent = new Intent(getBaseContext(), ResultActivity.class);
+                    Interpolacion interpolacion = new Interpolacion();
+                    //Valores terminos independientes
+                    double[] xi  = new double[matriz.length];
+                    for(int count= 0; count < matriz.length; count++){
+                        xi[count] = matriz[count][0];
+                        //Log.e("Xi", Double.toString(xi[count]));
+                    }
+                    //Función evaluada en xi
+                    double[] fxi = new double[matriz.length];
+                    for(int count= 0; count < matriz.length; count++){
+                        fxi[count] = matriz[count][1];
+                        //Log.e("Fxi", Double.toString(fxi[count]));
+                    }
+                    double x0 = Double.parseDouble(valorAInterpolar.getText().toString().trim());
+                    String result = "";
                     switch (metodo_a_usar){
                         case 0:
+                            interpolacion.Newton(fxi, xi, x0);
+                            result = interpolacion.getRes();
+                            intent.putExtra(EXTRA_MESSAGE, result);
                             new ResultActivity();
                             startActivity(intent);
                             break;
                         case 1:
+                            interpolacion.Lagrange(fxi, xi, x0);
+                            result = interpolacion.getRes();
+                            intent.putExtra(EXTRA_MESSAGE, result);
                             new ResultActivity();
                             startActivity(intent);
                             break;
