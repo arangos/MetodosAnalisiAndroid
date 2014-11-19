@@ -13,6 +13,9 @@
         <item>Iterativos</item>
         <item>Factorización</item>
     </string-array>
+    <string name="dialog_title">Acerca de</string>
+    <string name="dialog_message">Aplicación Android \nPor
+        \nFelipe Gutiérrez Isaza \nAndres Arango Cardona\nProfesor\nAlejandro Alberto Villa Isaza\nCurso: Análisis Numérico 20142\n Universidad EAFIT </string>
     <string-array name="sisLinealesDirector">
         <item>Eliminación Gaussiana</item>
         <item>Pivoteo Parcial</item>
