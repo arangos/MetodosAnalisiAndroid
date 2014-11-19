@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.arango.metodos.Metodos.SistemasDeEcuaciones;
@@ -25,14 +26,17 @@ public class Ec_LinealesActivity extends Activity {
     public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
     private Spinner spinnerTipo;
     private SistemasDeEcuaciones sistemasDeEcuaciones;
-    private TableLayout tableLayout;
-    private Button button;
-    private EditText txtNrofilas;
+    private TableLayout tableLayout, tableIni;
+    private Button btnFilas;
+    private EditText txtNrofilas, edtxtIter, edtxtTol;
+    private TextView txtValIniLineales;
     public String result;
+    private final int Lamda = 1;
     //
     private static int metodo_a_usar;
     private double[] b;
     private double [][] matriz;
+    private double[] iniValores;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +45,16 @@ public class Ec_LinealesActivity extends Activity {
         sistemasDeEcuaciones = new SistemasDeEcuaciones();
         metodo_a_usar = 0;
         tableLayout = (TableLayout) findViewById(R.id.tblLayout);
-        button = (Button) findViewById(R.id.btnNroFilas);
+        btnFilas = (Button) findViewById(R.id.btnNroFilas);
+
+        tableIni = (TableLayout) findViewById(R.id.tblVIniLineales);
         txtNrofilas = (EditText) findViewById(R.id.editTextNroFilas);
         spinnerTipo = (Spinner) findViewById(R.id.spinnerTipo);
+
+        txtValIniLineales = (TextView)findViewById(R.id.txtValIniLineales);
+        edtxtIter = (EditText)findViewById(R.id.edtxtIterLin);
+        edtxtTol = (EditText)findViewById(R.id.edtxtTolLin);
+
 // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.sis_lineales, android.R.layout.simple_spinner_item);
@@ -64,18 +75,30 @@ public class Ec_LinealesActivity extends Activity {
                                                                        R.array.sisLinealesDirector, android.R.layout.simple_spinner_item);
                                                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                                                                spinnerMetodo.setAdapter(adapter);
+                                                               edtxtIter.setVisibility(View.GONE);
+                                                               edtxtTol.setVisibility(View.GONE);
+                                                               txtValIniLineales.setVisibility(View.GONE);
+                                                               tableIni.setVisibility(View.GONE);
                                                                break;
                                                            case 1:
                                                                adapter = ArrayAdapter.createFromResource(getApplicationContext(),
                                                                        R.array.sisLinealesIterativos, android.R.layout.simple_spinner_item);
                                                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                                                                spinnerMetodo.setAdapter(adapter);
+                                                               edtxtIter.setVisibility(View.VISIBLE);
+                                                               edtxtTol.setVisibility(View.VISIBLE);
+                                                               txtValIniLineales.setVisibility(View.VISIBLE);
+                                                               tableIni.setVisibility(View.VISIBLE);
                                                                break;
                                                            case 2:
                                                                adapter = ArrayAdapter.createFromResource(getApplicationContext(),
                                                                        R.array.sisLinealesFactorizacion, android.R.layout.simple_spinner_item);
                                                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                                                                spinnerMetodo.setAdapter(adapter);
+                                                               edtxtIter.setVisibility(View.GONE);
+                                                               edtxtTol.setVisibility(View.GONE);
+                                                               txtValIniLineales.setVisibility(View.GONE);
+                                                               tableIni.setVisibility(View.GONE);
                                                                 break;
                                                            default:
                                                                break;
@@ -181,7 +204,7 @@ public class Ec_LinealesActivity extends Activity {
             }
         });
 
-        button.setOnClickListener(new View.OnClickListener() {
+        btnFilas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Toast.makeText(getApplicationContext(),txtNrofilas.getText().toString(),Toast.LENGTH_SHORT).show();
@@ -190,7 +213,11 @@ public class Ec_LinealesActivity extends Activity {
                         Toast.makeText(getBaseContext(), "Ingrese nro de filas y luego la matriz", Toast.LENGTH_SHORT).show();
                     }else{
                     int filas = Integer.parseInt(txtNrofilas.getText().toString());
-                    setFilas(filas);
+                        if(metodo_a_usar == 4 || metodo_a_usar == 5){
+                            setFilas(filas);
+                            setValoresIni(filas);
+                        }else{
+                    setFilas(filas);}
                     }
                 }catch(Exception e){Log.e("Error :", e.toString());}
             }
@@ -213,43 +240,61 @@ public class Ec_LinealesActivity extends Activity {
         try {
             switch (item.getItemId()) {
                 case R.id.action_calc:
+                    result = "";
                     this.setMatriz();
                     double[][] A = getMatriz();
                     this.setB();
                     switch (metodo_a_usar) {
                         case 0:
                             sistemasDeEcuaciones.eliminacionGauss(A, b, -1);
+                            result += sistemasDeEcuaciones.getRes();
                             break;
                         case 1:
                             sistemasDeEcuaciones.eliminacionGauss(A, b, 0);
+                            result += sistemasDeEcuaciones.getRes();
                             break;
                         case 2:
                             sistemasDeEcuaciones.eliminacionGauss(A, b, 1);
+                            result += sistemasDeEcuaciones.getRes();
                             break;
                         case 3:
                             sistemasDeEcuaciones.eliminacionGauss(A, b, 2);
+                            result += sistemasDeEcuaciones.getRes();
                             break;
                         case 4:
                             //Jacobi
+                            this.getValoresIniciales();
+                            sistemasDeEcuaciones.Jacobi(A,b,Double.parseDouble(edtxtTol.getText().toString()),
+                                    Integer.parseInt(edtxtIter.getText().toString()),iniValores,Lamda);
+                            double[][] tablaJacobi= sistemasDeEcuaciones.getTabla();
+                            getResult(tablaJacobi);
                             break;
                         case 5:
                             //Seidel
+                            this.getValoresIniciales();
+                            sistemasDeEcuaciones.Seidel(A,b,Double.parseDouble(edtxtTol.getText().toString()),
+                                    Integer.parseInt(edtxtIter.getText().toString()),iniValores,Lamda);
+                            double[][] tablaSeidel = sistemasDeEcuaciones.getTabla();
+                            getResult(tablaSeidel);
                             break;
                         case 6:
                             sistemasDeEcuaciones.LUeliminacionGauss(A, b);
+                            result += sistemasDeEcuaciones.getRes();
                             break;
                         case 7:
                             sistemasDeEcuaciones.cholesky(A, b);
+                            result += sistemasDeEcuaciones.getRes();
                             break;
                         case 8:
                             sistemasDeEcuaciones.crout(A, b);
+                            result += sistemasDeEcuaciones.getRes();
                             break;
                         case 9:
                             sistemasDeEcuaciones.doolittle(A, b);
+                            result += sistemasDeEcuaciones.getRes();
                             break;
                     }
-                    result = "";
-                    result += sistemasDeEcuaciones.getRes();
+
                     //resultado = Integer.toString(resultado.length());
                     sistemasDeEcuaciones.imprimir(A);
                     //Toast.makeText(getBaseContext(), result, Toast.LENGTH_LONG).show();
@@ -330,5 +375,48 @@ public class Ec_LinealesActivity extends Activity {
             b[i] = Double.parseDouble(editText.getText().toString().trim());
             //Log.e("[",editText.getText().toString()+"]");
         }
+    }
+
+    public void setValoresIni(int columnas){
+        tableIni.removeAllViews();
+        for (int i = 0; i < 1; i++) {
+            TableRow row = new TableRow(Ec_LinealesActivity.this);
+            row.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+
+            for (int j = 0; j < columnas; j++) {
+                EditText edit = new EditText(Ec_LinealesActivity.this);
+                edit.setInputType(InputType.TYPE_CLASS_NUMBER|InputType.TYPE_NUMBER_FLAG_DECIMAL|InputType.TYPE_NUMBER_FLAG_SIGNED);
+                edit.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+                edit.setText("");
+
+                //edit.setKeyListener();
+                row.addView(edit);
+            }
+            tableIni.addView(row);
+        }
+    }
+
+    /*
+*Return the matrix values inside each row
+ */
+    public void getValoresIniciales(){
+        int filas = tableIni.getChildCount();
+        iniValores = new double[filas];
+            TableRow row = (TableRow) tableIni.getChildAt(0);
+            for(int j = 0; j < row.getChildCount(); j++){
+                EditText editText = (EditText) row.getChildAt(j);
+                iniValores[j] = Double.parseDouble(editText.getText().toString().trim());
+                Log.e("[",editText.getText().toString()+"]");
+            }
+        }
+    public String getResult(double [][] tabla){
+        result = "";
+        for(int fila = 0; fila < tabla.length; fila++){
+            for(int columna = 0; columna < tabla[0].length; columna++){
+                result += "   "+String.valueOf(tabla[fila][columna]);
+            }
+            result += "\n";
+        }
+        return result;
     }
 }
