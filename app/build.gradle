@@ -21,4 +21,6 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile files('E:/Documentos/AndroidStdio/MetodosAnalisiAndroid/libs/jep-2.4.1.jar')
+    compile files('E:/Documentos/AndroidStdio/MetodosAnalisiAndroid/libs/ext-1.1.1.jar')
 }
