@@ -39,5 +39,17 @@
         android:text="Calcular"
         android:background="@drawable/button"
         android:id="@+id/btnIntegracion" />
+    <HorizontalScrollView android:layout_width="fill_parent"
+        android:layout_height="202dp"
+        android:layout_weight="0.75">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="¡RESULTADO!"
+            android:scrollbars = "vertical"
+            android:id="@+id/txtIntegResult"
+            android:layout_weight="0.90" />
+    </HorizontalScrollView>
 
 </LinearLayout>
