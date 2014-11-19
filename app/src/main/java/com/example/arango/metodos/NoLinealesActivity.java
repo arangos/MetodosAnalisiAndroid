@@ -137,7 +137,7 @@ public class NoLinealesActivity extends Activity {
             @Override
             public void onClick(View view) {
                 if(metodo_a_usar < 0){
-                    Toast.makeText(getApplicationContext(),"Ingrese un metodo ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Seleccione un método ", Toast.LENGTH_SHORT).show();
                 }else{
                     try {
                         EcNoLineales ecunl = new EcNoLineales(edtxtFuncion.getText().toString().trim());
