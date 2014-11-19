@@ -4,25 +4,31 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/edtxtNumeroPuntos"
-        android:hint="nro de puntos" />
-
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <EditText
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/txtInterpNumeroPuntos"
+            android:hint="nro de puntos" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ingresar Filas"
+            android:background="@drawable/button"
+            android:layout_toEndOf="@+id/txtInterpNumeroPuntos"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/txtInterpNumeroPuntos"
+            android:layout_marginLeft="58dp"
+            android:id="@+id/btnInterpFilas" />
+        </RelativeLayout>
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/spinnerInterpolacion" />
-
-    <Button
-        android:layout_width="86dp"
-        android:layout_height="wrap_content"
-        android:text="Calcular"
-        android:background="@drawable/button"
-        android:id="@+id/btnCalcInterpolacion" />
 
     <EditText
         android:layout_width="match_parent"
@@ -31,4 +37,30 @@
         android:ems="10"
         android:id="@+id/edtxtInterpValor"
         android:hint="Valor a interpolar" />
+
+    <Button
+        android:layout_width="86dp"
+        android:layout_height="wrap_content"
+        android:text="Calcular"
+        android:background="@drawable/button"
+        android:id="@+id/btnCalcInterpolacion" />
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scrollbars="none"
+        android:layout_weight="1"
+        android:layout_below="@+id/btnCalcInterpolacion"
+        android:id="@+id/scrollView">
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/tblInterpolacion"
+            android:background="#1c1600ff"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/btnCalcInterpolacion"
+            android:layout_alignParentBottom="true"></TableLayout>
+    </ScrollView>
 </LinearLayout>

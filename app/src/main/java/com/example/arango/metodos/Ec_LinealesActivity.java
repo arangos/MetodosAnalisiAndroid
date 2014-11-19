@@ -245,8 +245,8 @@ public class Ec_LinealesActivity extends Activity {
                 result += sistemasDeEcuaciones.getRes();
                 //resultado = Integer.toString(resultado.length());
                 sistemasDeEcuaciones.imprimir(A);
-                Toast.makeText(getBaseContext(), result, Toast.LENGTH_LONG).show();
-                Log.e("Result", result);
+                //Toast.makeText(getBaseContext(), result, Toast.LENGTH_LONG).show();
+                //Log.e("Result", result);
                 return true;
             case R.id.action_settings:
 
@@ -302,11 +302,11 @@ public class Ec_LinealesActivity extends Activity {
             }
         }
 
-        for(int f = 0; f<matriz.length; f++){
+        /*for(int f = 0; f<matriz.length; f++){
             for(int c = 0; c<matriz[f].length;c++){
                 Log.e("Test Matriz [",matriz[f][c]+"]");
             }
-        }
+        }*/
     }
     public double [][] getMatriz(){
         return this.matriz;
