@@ -400,15 +400,16 @@ public class Ec_LinealesActivity extends Activity {
 *Return the matrix values inside each row
  */
     public void getValoresIniciales(){
-        int filas = tableIni.getChildCount();
+        TableRow row = (TableRow) tableIni.getChildAt(0);
+        int filas = row.getChildCount();
         iniValores = new double[filas];
-            TableRow row = (TableRow) tableIni.getChildAt(0);
             for(int j = 0; j < row.getChildCount(); j++){
                 EditText editText = (EditText) row.getChildAt(j);
                 iniValores[j] = Double.parseDouble(editText.getText().toString().trim());
-                Log.e("[",editText.getText().toString()+"]");
+                //Log.e("[",editText.getText().toString()+"]");
             }
         }
+
     public String getResult(double [][] tabla){
         result = "";
         for(int fila = 0; fila < tabla.length; fila++){
