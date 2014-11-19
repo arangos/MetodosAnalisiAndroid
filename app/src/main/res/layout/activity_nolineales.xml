@@ -32,6 +32,24 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="text"
+        android:ems="10"
+        android:id="@+id/edtxtAd1"
+        android:layout_weight="0.06"
+        android:visibility="gone" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:ems="10"
+        android:id="@+id/edtxtAd3"
+        android:layout_weight="0.06"
+        android:visibility="gone" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:ems="10"
         android:id="@+id/editTextDelta"
@@ -45,12 +63,30 @@
         android:id="@+id/editTextIteraciones"
         android:hint="Iteraciones" />
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:ems="10"
+        android:id="@+id/edtxtAd2"
+        android:layout_weight="0.06"
+        android:visibility="gone" />
+
     <Button
         android:layout_width="124dp"
         android:layout_height="wrap_content"
         android:text="Calcular"
         android:id="@+id/buttonCalcNoLin"
         android:background="@drawable/button" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Xi  F(xi)"
+        android:id="@+id/txtColumName"
+        android:layout_weight="0.06" />
+
     <HorizontalScrollView android:layout_width="fill_parent"
         android:layout_height="202dp"
         android:layout_weight="0.75">
