@@ -1,7 +1,9 @@
 package com.example.arango.metodos.Metodos;
 
+import com.example.arango.metodos.Parser.Funcion;
+
 public class EcNoLineales {
-    /*private double[][] tabla;
+    private double[][] tabla;
     private String mensaje;
     private Funcion fx;
     private Funcion dfx;
@@ -393,6 +395,6 @@ public class EcNoLineales {
                 }
             }
         }
-    }*/
+    }
 }
 
