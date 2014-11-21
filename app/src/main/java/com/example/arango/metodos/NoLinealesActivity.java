@@ -202,12 +202,15 @@ public class NoLinealesActivity extends Activity {
     }
     public String getResult(double [][] tabla){
         String result = "";
+        int counter = 0;
         for(int fila = 0; fila < tabla.length; fila++){
             for(int columna = 0; columna < tabla[0].length; columna++){
                 result += "   "+String.valueOf(tabla[fila][columna]);
             }
+            counter++;
             result += "\n";
         }
+        Toast.makeText(getBaseContext(),"Num Filas"+counter, Toast.LENGTH_LONG).show();
         return result;
     }
 }
