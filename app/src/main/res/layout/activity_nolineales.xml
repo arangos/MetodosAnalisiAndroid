@@ -87,18 +87,23 @@
         android:id="@+id/txtColumName"
         android:layout_weight="0.06" />
 
-    <HorizontalScrollView android:layout_width="fill_parent"
-        android:layout_height="202dp"
-        android:layout_weight="0.75">
+    <ScrollView android:layout_width="fill_parent"
+        android:layout_height="358dp"
+        android:scrollbars="vertical"
+        >
+        <HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="¡RESULTADO!"
-        android:scrollbars = "vertical"
+        android:scrollbars = "horizontal"
         android:id="@+id/txtNoLinealesResult"
         android:layout_weight="0.90" />
-    </HorizontalScrollView>
+        </HorizontalScrollView>
+    </ScrollView>
 
 </LinearLayout>
 </ScrollView>
